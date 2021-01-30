@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <UserSecretsId>a7330bdb-3af5-4d89-920b-e3f77737ab3a</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+    <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.11" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VendorService.Application\VendorService.Application.csproj" />
+    <ProjectReference Include="..\VendorService.Infra.CrossCutting.IoC\VendorService.Infra.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\VendorService.Shared\VendorService.Shared.csproj" />
+    <ProjectReference Include="..\VendorService.Application\VendorService.Application.csproj" />
+    <ProjectReference Include="..\VendorService.Infra.Data\VendorService.Infra.Data.csproj" />
+    <ProjectReference Include="..\VendorService.Shared\VendorService.Shared.csproj" />
+  </ItemGroup>
+
+
+</Project>
