@@ -29,27 +29,38 @@ namespace VendorService.Application.Services.Interfaces
 
             var order = _mapper.Map<SalesOrder>(orderModel);
             var result = _mapper.Map<SalesOrderModel>(await _repository.Create(order));
-            return new BaseModel<SalesOrderModel>(true, EMessages.Teste, result);
+            return new BaseModel<SalesOrderModel>(true, EMessages.Success, result);
         }
 
-        public Task<BaseModel<SalesOrderModel>> Delete(int id)
+        public async Task<BaseModel<SalesOrderModel>> Update(SalesOrderModel productModel)
         {
-            throw new System.NotImplementedException();
+            var entity = await _repository.GetById(productModel.Id.Value);
+
+            if (entity is null)
+                return new BaseModel<SalesOrderModel>(false, EMessages.ProductNotFound, _mapper.Map<SalesOrderModel>(entity));
+
+            var product = _mapper.Map<SalesOrder>(productModel);
+            var result = _mapper.Map<SalesOrderModel>(await _repository.Update(product));
+
+            return new BaseModel<SalesOrderModel>(true, EMessages.Success, result);
         }
 
-        public Task<BaseModel<SalesOrderModel>> GetById(int id)
+        public async Task<BaseModel<SalesOrderModel>> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            await _repository.Delete(id);
+            return new BaseModel<SalesOrderModel>(true, EMessages.Success);
         }
 
-        public Task<BaseModel<List<SalesOrderModel>>> List()
+        public async Task<BaseModel<SalesOrderModel>> GetById(int id)
         {
-            throw new System.NotImplementedException();
+            var result = _mapper.Map<SalesOrderModel>(await _repository.GetById(id));
+            return new BaseModel<SalesOrderModel>(true, EMessages.Success, result);
         }
 
-        public Task<BaseModel<SalesOrderModel>> Update(SalesOrderModel salesOrderModel)
+        public async Task<BaseModel<List<SalesOrderModel>>> List()
         {
-            throw new System.NotImplementedException();
+            var result = _mapper.Map<List<SalesOrderModel>>(await _repository.List());
+            return new BaseModel<List<SalesOrderModel>>(true, EMessages.Success, result);
         }
     }
 }

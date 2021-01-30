@@ -6,10 +6,10 @@ namespace VendorService.Domain.Repositories
 {
     public interface IProductRepository
     {
-        Task<Product> Create(Product productModel);
-        Task<Product> Update(Product productModel);
-        Task<Product> Delete(int id);
+        Task<Product> Create(Product product);
         Task<Product> GetById(int id);
         Task<List<Product>> List();
+        Task<Product> Update(Product product);
+        //Task<Product> Delete(int id);
     }
 }
