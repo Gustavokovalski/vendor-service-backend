@@ -21,6 +21,7 @@ namespace VendorService.Infra.CrossCutting.IoC
 
             services.AddScoped<LoginModelValidator, LoginModelValidator>();
             services.AddScoped<UserRegisterModelValidator, UserRegisterModelValidator>();
+            services.AddScoped<ProductModelValidator, ProductModelValidator>();
 
         }
     }

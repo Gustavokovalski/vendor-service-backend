@@ -14,6 +14,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
@@ -26,10 +27,8 @@
   <ItemGroup>
     <ProjectReference Include="..\VendorService.Application\VendorService.Application.csproj" />
     <ProjectReference Include="..\VendorService.Infra.CrossCutting.IoC\VendorService.Infra.CrossCutting.IoC.csproj" />
-    <ProjectReference Include="..\VendorService.Shared\VendorService.Shared.csproj" />
     <ProjectReference Include="..\VendorService.Application\VendorService.Application.csproj" />
     <ProjectReference Include="..\VendorService.Infra.Data\VendorService.Infra.Data.csproj" />
-    <ProjectReference Include="..\VendorService.Shared\VendorService.Shared.csproj" />
   </ItemGroup>
 
 

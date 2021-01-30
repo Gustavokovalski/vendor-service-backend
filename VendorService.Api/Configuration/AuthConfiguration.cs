@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using VendorService.Shared;
 
 namespace VendorService.Api.Configuration
 {
     public static class AuthConfiguration
     {
-        public static void AddAuthConfiguration(this IServiceCollection services)
+        public static void AddAuthConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            var key = Encoding.ASCII.GetBytes(ConfigurationHelper.Secret);
+            var key = Encoding.ASCII.GetBytes(configuration["Secret"]);
 
             services.AddAuthentication(x =>
             {

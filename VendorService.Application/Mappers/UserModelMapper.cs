@@ -2,7 +2,7 @@
 using VendorService.Application.Models;
 using VendorService.Domain.Entities;
 using VendorService.Domain.Enums;
-using VendorService.Shared;
+using VendorService.Domain.Extensions;
 
 namespace VendorService.Application.Mappers
 {

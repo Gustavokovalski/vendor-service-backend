@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VendorService.Domain.Enums;
-using VendorService.Shared;
+using VendorService.Domain.Extensions;
 
 namespace VendorService.Application.Models
 {

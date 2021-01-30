@@ -7,8 +7,8 @@ using VendorService.Application.Models;
 using VendorService.Application.Validators;
 using VendorService.Domain.Entities;
 using VendorService.Domain.Enums;
+using VendorService.Domain.Extensions;
 using VendorService.Domain.Repositories;
-using VendorService.Shared;
 
 namespace VendorService.Application.Services.Interfaces
 {

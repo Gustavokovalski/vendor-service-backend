@@ -1,5 +1,5 @@
 ﻿using System;
-using VendorService.Shared;
+using VendorService.Domain.Extensions;
 
 namespace VendorService.Application.Models
 {

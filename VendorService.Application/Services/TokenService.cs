@@ -1,19 +1,24 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using VendorService.Application.Mappers;
-using VendorService.Shared;
 
 namespace VendorService.Application.Services.Interfaces
 {
     public class TokenService : ITokenService
     {
+        private readonly string secret;
+        public TokenService(IConfiguration configuration)
+        {
+            secret = configuration["Secret"];
+        }
         public string GenerateToken(UserModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(ConfigurationHelper.Secret);
+            var key = Encoding.ASCII.GetBytes(secret);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

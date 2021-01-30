@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VendorService.Domain.Extensions\VendorService.Domain.Extensions.csproj" />
     <ProjectReference Include="..\VendorService.Domain\VendorService.Domain.Services.csproj" />
-    <ProjectReference Include="..\VendorService.Shared\VendorService.Shared.csproj" />
   </ItemGroup>
 
 </Project>
