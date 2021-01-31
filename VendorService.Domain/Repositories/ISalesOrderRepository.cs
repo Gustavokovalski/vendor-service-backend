@@ -10,7 +10,7 @@ namespace VendorService.Domain.Repositories
     {
         Task<SalesOrder> Create(SalesOrder order);
         Task<SalesOrder> Update(SalesOrder order);
-        Task<SalesOrder> Delete(int id);
+        Task Delete(int id);
         Task<SalesOrder> GetById(int id);
         Task<List<SalesOrder>> List();
     }

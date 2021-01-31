@@ -11,6 +11,7 @@ namespace VendorService.Application.Services.Interfaces
         Task<BaseModel<SalesOrderModel>> Update(SalesOrderModel salesOrderModel);
         Task<BaseModel<SalesOrderModel>> Delete(int id);
         Task<BaseModel<SalesOrderModel>> GetById(int id);
+        Task<BaseModel<List<ProductOrderModel>>> GetByOrderId(int id);
         Task<BaseModel<List<SalesOrderModel>>> List();
     }
 }

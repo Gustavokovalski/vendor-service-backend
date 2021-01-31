@@ -127,20 +127,5 @@ namespace VendorService.Infra.Data.Repositories
                 return product;
             }
         }
-        //public async Task Inactivate(int id)
-        //{
-        //    SqlCommand sqlcmd;
-        //    using (var connection = new SqlConnection(connectionString))
-        //    {
-        //        string query = " DELETE FROM Product WHERE Id = @id; ";
-        //        connection.Open();
-        //        sqlcmd = connection.CreateCommand();
-        //        sqlcmd.Connection = connection;
-        //        sqlcmd.CommandText = query;
-        //        sqlcmd.Parameters.AddWithValue("@id", id.ToString().ToUpper());
-        //        await sqlcmd.ExecuteNonQueryAsync();
-        //        connection.Close();
-        //    }
-        //}
     }
 }

@@ -18,10 +18,12 @@ namespace VendorService.Infra.CrossCutting.IoC
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISalesOrderRepository, SalesOrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductOrderRepository, ProductOrderRepository>();
 
             services.AddScoped<LoginModelValidator, LoginModelValidator>();
             services.AddScoped<UserRegisterModelValidator, UserRegisterModelValidator>();
             services.AddScoped<ProductModelValidator, ProductModelValidator>();
+            services.AddScoped<SalesOrderModelValidator, SalesOrderModelValidator>();
 
         }
     }

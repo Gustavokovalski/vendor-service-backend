@@ -12,8 +12,6 @@ namespace VendorService.Api.Controllers
     [ApiController]
     public class SalesOrderController : ControllerBase
     {
-
-        //private readonly IProductService _service;
         private readonly ISalesOrderService _service;
 
         public SalesOrderController(ISalesOrderService service)
@@ -21,43 +19,62 @@ namespace VendorService.Api.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         [HttpPost]
-        //[Authorize]
-        [AllowAnonymous]
-        public async Task<IActionResult> Post([FromBody] SalesOrderModel orderModel)
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> Post([FromBody] SalesOrderModel salesOrderModel)
         {
-            if (orderModel is null)
+            if (salesOrderModel is null)
             {
                 return BadRequest();
             }
 
-            var response = await _service.Create(orderModel);
+            var response = await _service.Create(salesOrderModel);
             return Ok(response);
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> Put([FromBody] SalesOrderModel salesOrderModel)
         {
+            if (salesOrderModel is null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Update(salesOrderModel);
+            return Ok(response);
         }
 
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> Delete(int id)
         {
+            var response = await _service.Delete(id);
+            return Ok(response);
+        }
+
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var response = await _service.GetById(id);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> List()
+        {
+            var response = await _service.List();
+            return Ok(response);
+        }
+
+        [HttpGet("productorder/{id}")]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> GetByOrderId(int id)
+        {
+            var response = await _service.GetByOrderId(id);
+            return Ok(response);
         }
     }
 }

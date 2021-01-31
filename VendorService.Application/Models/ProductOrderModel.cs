@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AutoMapper;
 
-namespace VendorService.Domain.Services.Entities
+namespace VendorService.Application.Mappers
 {
-    public class ProductOrder
+    public class ProductOrderModel
     {
         public int Id { get; set; }
         public int? ProductId { get; set; }
@@ -12,5 +10,6 @@ namespace VendorService.Domain.Services.Entities
         public int Quantity { get; set; }
         public decimal ProductPrice { get; set; }
         public decimal TotalPrice { get; set; }
+
     }
 }

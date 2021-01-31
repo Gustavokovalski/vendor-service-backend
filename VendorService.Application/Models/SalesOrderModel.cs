@@ -8,9 +8,10 @@ namespace VendorService.Application.Mappers
     public class SalesOrderModel
     {
         public int? Id { get; set; }
-        public string CostumerEmail { get; set; }
+        public string CustomerEmail { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public List<ProductOrder> ProductOrders { get; set; }
+        public List<ProductOrderModel> ProductOrders { get; set; }
+        public decimal OrderTotalPrice { get; set; }
 
     }
 }
