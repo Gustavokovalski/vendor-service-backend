@@ -37,7 +37,7 @@ namespace VendorService.Application.Services.Interfaces
             var entity = await _repository.GetById(productModel.Id.Value);
 
             if (entity is null)
-                return new BaseModel<SalesOrderModel>(false, EMessages.ProductNotFound, _mapper.Map<SalesOrderModel>(entity));
+                return new BaseModel<SalesOrderModel>(false, EMessages.SuccessOrderEdit, _mapper.Map<SalesOrderModel>(entity));
 
             var product = _mapper.Map<SalesOrder>(productModel);
             var result = _mapper.Map<SalesOrderModel>(await _repository.Update(product));

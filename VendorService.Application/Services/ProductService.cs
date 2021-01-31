@@ -37,37 +37,27 @@ namespace VendorService.Application.Services.Interfaces
 
         public async Task<BaseModel<ProductModel>> Update(ProductModel productModel)
         {
-            var entity = await _repository.GetById(productModel.Id.Value);
-
-            if (entity is null)
-                return new BaseModel<ProductModel>(false, EMessages.ProductNotFound, _mapper.Map<ProductModel>(entity));
-
             var product = _mapper.Map<Product>(productModel);
             var result = _mapper.Map<ProductModel>(await _repository.Update(product));
 
-            return new BaseModel<ProductModel>(true, EMessages.Success, result);
+            return new BaseModel<ProductModel>(true, EMessages.SuccessProductEdit, result);
         }
 
-        public async Task<BaseModel<ProductModel>> Inactivate(int id)
+        public async Task<BaseModel<ProductModel>> Inactivate(ProductModel productModel)
         {
-            var entity = await _repository.GetById(id);
-
-            if (entity is null)
-                return new BaseModel<ProductModel>(false, EMessages.ProductNotFound, _mapper.Map<ProductModel>(entity));
-
-            entity.Active = entity.Active == true ? false : true;
-
-            var result = _mapper.Map<ProductModel>(await _repository.Update(entity));
-            return new BaseModel<ProductModel>(true, EMessages.Success, result);
-
+            var product = _mapper.Map<Product>(productModel);
+            product.Active = false;
+            var result = _mapper.Map<ProductModel>(await _repository.Update(product));
+            return new BaseModel<ProductModel>(true, EMessages.SuccessProductDelete, result);
         }
 
         public async Task<BaseModel<ProductModel>> GetById(int id)
-        {
+        {   
             var result = _mapper.Map<ProductModel>(await _repository.GetById(id));
             return new BaseModel<ProductModel>(true, EMessages.Success, result);
         }
 
+ 
         public async Task<BaseModel<List<ProductModel>>> List()
         {
             var result = _mapper.Map<List<ProductModel>>(await _repository.List());

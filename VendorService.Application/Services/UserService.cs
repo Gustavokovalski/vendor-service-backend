@@ -58,7 +58,6 @@ namespace VendorService.Application.Services.Interfaces
         public async Task<BaseModel<UserRegisterModel>> Create(UserRegisterModel userRegisterModel)
         {
             userRegisterModel.Password = Md5HashExtensions.CreateMD5(userRegisterModel.Password);
-
             var validationResult = _userRegisterModelValidator.Validate(userRegisterModel);
             if (!validationResult.IsValid)
             {
@@ -67,11 +66,12 @@ namespace VendorService.Application.Services.Interfaces
 
             var user = _mapper.Map<User>(userRegisterModel);
             var result = _mapper.Map<UserRegisterModel>(await _userRepository.Create(user));
-            return new BaseModel<UserRegisterModel>(true, EMessages.Success, result);
+            return new BaseModel<UserRegisterModel>(true, EMessages.SuccessUserCreate, result);
         }
 
         public async Task<BaseModel<UserRegisterModel>> Update(UserRegisterModel userRegisterModel)
         {
+            userRegisterModel.Password = Md5HashExtensions.CreateMD5(userRegisterModel.Password);
             var validationResult = _userRegisterModelValidator.Validate(userRegisterModel);
             if (!validationResult.IsValid)
             {
@@ -81,7 +81,7 @@ namespace VendorService.Application.Services.Interfaces
             var user = _mapper.Map<User>(userRegisterModel);
             var result = _mapper.Map<UserRegisterModel>(await _userRepository.Update(user));
 
-            return new BaseModel<UserRegisterModel>(true, EMessages.Success, result);
+            return new BaseModel<UserRegisterModel>(true, EMessages.SuccessUserEdit, result);
         }
 
        
@@ -100,7 +100,7 @@ namespace VendorService.Application.Services.Interfaces
         public async Task<BaseModel<UserModel>> Delete(Guid id)
         {
             await _userRepository.Delete(id);
-            return new BaseModel<UserModel>(true, EMessages.Success);
+            return new BaseModel<UserModel>(true, EMessages.SuccessUserDelete);
         }
 
         public BaseModel<List<EnumModel>> ListProfiles()

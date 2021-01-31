@@ -9,7 +9,7 @@ namespace VendorService.Application.Services.Interfaces
     {
         Task<BaseModel<ProductModel>> Create(ProductModel productModel);
         Task<BaseModel<ProductModel>> Update(ProductModel productModel);
-        Task<BaseModel<ProductModel>> Inactivate(int id);
+        Task<BaseModel<ProductModel>> Inactivate(ProductModel productModel);
         Task<BaseModel<ProductModel>> GetById(int id);
         Task<BaseModel<List<ProductModel>>> List();
     }

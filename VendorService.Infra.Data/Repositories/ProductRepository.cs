@@ -91,19 +91,19 @@ namespace VendorService.Infra.Data.Repositories
             {
                 connection.Open();
                 sqlcmd = connection.CreateCommand();
-            }
-            sqlcmd.CommandText = query;
-            using (var reader = await sqlcmd.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
+                sqlcmd.CommandText = query;
+                using (var reader = await sqlcmd.ExecuteReaderAsync())
                 {
-                    products.Add(new Product()
+                    while (await reader.ReadAsync())
                     {
-                        Id = reader.GetInt32(reader.GetOrdinal(nameof(Product.Id))),
-                        Name = reader.GetString(reader.GetOrdinal(nameof(Product.Name))),
-                        Price = reader.GetDecimal(reader.GetOrdinal(nameof(Product.Price))),
-                        Active = reader.GetBoolean(reader.GetOrdinal(nameof(Product.Active)))
-                    });
+                        products.Add(new Product()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal(nameof(Product.Id))),
+                            Name = reader.GetString(reader.GetOrdinal(nameof(Product.Name))),
+                            Price = reader.GetDecimal(reader.GetOrdinal(nameof(Product.Price))),
+                            Active = reader.GetBoolean(reader.GetOrdinal(nameof(Product.Active)))
+                        });
+                    }
                 }
             }
             return products;
@@ -114,10 +114,11 @@ namespace VendorService.Infra.Data.Repositories
             SqlCommand sqlcmd;
             using (var connection = new SqlConnection(connectionString))
             {
-                string query = " UPDATE Product SET Name = @name, Price = @price, @Active, @active WHERE Id = @id; ";
+                string query = " UPDATE Product SET Name = @name, Price = @price, Active = @active WHERE Id = @id; ";
                 connection.Open();
                 sqlcmd = connection.CreateCommand();
                 sqlcmd.CommandText = query;
+                sqlcmd.Parameters.AddWithValue("@id", product.Id);
                 sqlcmd.Parameters.AddWithValue("@name", product.Name);
                 sqlcmd.Parameters.AddWithValue("@price", product.Price);
                 sqlcmd.Parameters.AddWithValue("@active", product.Active);

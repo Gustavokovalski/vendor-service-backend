@@ -70,6 +70,14 @@ namespace VendorService.Api.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{id:guid}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var response = await _userService.GetById(id);
+            return Ok(response);
+        }
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
         //[AllowAnonymous]

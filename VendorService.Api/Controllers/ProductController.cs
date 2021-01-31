@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using VendorService.Application.Mappers;
 using VendorService.Application.Services.Interfaces;
 
 namespace VendorService.Api.Controllers
@@ -15,44 +18,61 @@ namespace VendorService.Api.Controllers
             _service = service;
         }
 
-        // GET: api/<ValuesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+  
+        [HttpPost]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> Post([FromBody] ProductModel productModel)
         {
-            return new string[] { "value1", "value2" };
+            if (productModel is null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Create(productModel);
+            return Ok(response);
         }
 
-        // GET api/<ValuesController>/5
+        [HttpPut]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> Put([FromBody] ProductModel productModel)
+        {
+            if (productModel is null)
+            {
+                return BadRequest();
+            }
+
+            var response = await _service.Update(productModel);
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("inactivate")]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> Inactivate([FromBody] ProductModel productModel)
+        {
+            if (productModel is null)
+            {
+                return BadRequest();
+            }
+            var response = await _service.Inactivate(productModel);
+            return Ok(response);
+        }
+
+
         [HttpGet("{id}")]
-        public string Get(int id)
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> GetById(int id)
         {
-            return "value";
+            var response = await _service.GetById(id);
+            return Ok(response);
         }
 
-        //[HttpPost]
-        ////[Authorize]
-        //public async Task<IActionResult> Post([FromBody] ProductModel productModel)
-        //{
-        //    if (productModel is null)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    var response = await _service.Create(productModel);
-        //    return Ok(response);
-        //}
-
-
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet]
+        [Authorize(Roles = "Admin,Employee")]
+        public async Task<IActionResult> List()
         {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var response = await _service.List();
+            return Ok(response);
         }
     }
 }

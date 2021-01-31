@@ -2,7 +2,7 @@
 
 namespace VendorService.Application.Mappers
 {
-    public class ProductModel : Profile
+    public class ProductModel
     {
         public int? Id { get; set; }
         public string Name { get; set; }

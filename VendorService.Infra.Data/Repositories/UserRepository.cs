@@ -83,7 +83,7 @@ namespace VendorService.Infra.Data.Repositories
         {
 
             SqlCommand sqlcmd;
-            string query = " SELECT Id, UserProfile, UserProfile FROM UserRegistration WHERE Id=@id; ";
+            string query = " SELECT Id, Email, UserProfile FROM UserRegistration WHERE Id=@id; ";
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -99,7 +99,7 @@ namespace VendorService.Infra.Data.Repositories
                         {
                             Id = reader.GetGuid(reader.GetOrdinal(nameof(User.Id))),
                             Email = reader.GetString(reader.GetOrdinal(nameof(User.Email))),
-                            Profile = (EProfiles)reader.GetInt32(reader.GetOrdinal(nameof(User.Profile)))
+                            Profile = (EProfiles)reader.GetInt32(reader.GetOrdinal("UserProfile"))
                         };
                         connection.Close();
 
@@ -143,14 +143,14 @@ namespace VendorService.Infra.Data.Repositories
             SqlCommand sqlcmd;
             using (var connection = new SqlConnection(connectionString))
             {
-                string query = " UPDATE UserRegistration SET Email = @email, UserProfile = @userProfile, @UserPassword, @userPassword WHERE Id = @id; ";
+                string query = " UPDATE UserRegistration SET Email = @email, UserProfile = @userProfile, UserPassword = @userPassword WHERE Id = @id; ";
                 connection.Open();
                 sqlcmd = connection.CreateCommand();
                 sqlcmd.CommandText = query;
                 sqlcmd.Parameters.AddWithValue("@id", user.Id.ToString().ToUpper());
                 sqlcmd.Parameters.AddWithValue("@email", user.Email);
-                sqlcmd.Parameters.AddWithValue("@profile", user.Profile.GetEnumValue());
-                sqlcmd.Parameters.AddWithValue("@password", user.Password);
+                sqlcmd.Parameters.AddWithValue("@userProfile", user.Profile.GetEnumValue());
+                sqlcmd.Parameters.AddWithValue("@userPassword", user.Password);
                 await sqlcmd.ExecuteNonQueryAsync();
                 connection.Close();
                 user.Password = string.Empty;
