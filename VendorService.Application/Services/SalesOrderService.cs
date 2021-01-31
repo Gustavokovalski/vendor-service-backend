@@ -65,7 +65,7 @@ namespace VendorService.Application.Services.Interfaces
 
         public async Task<BaseModel<List<ProductOrderModel>>> GetByOrderId(int id)
         {
-            var result = _mapper.Map<List<ProductOrderModel>>(await _productOrderRepository.GetByOrderId(id));
+            var result = _mapper.Map<List<ProductOrderModel>>(await _repository.GetByOrderId(id));
             return new BaseModel<List<ProductOrderModel>>(true, EMessages.Success, result);
         }
 
