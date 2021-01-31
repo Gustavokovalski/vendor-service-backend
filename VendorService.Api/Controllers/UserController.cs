@@ -69,5 +69,14 @@ namespace VendorService.Api.Controllers
             var response = _userService.ListProfiles();
             return Ok(response);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        //[AllowAnonymous]
+        public async Task<IActionResult> List()
+        {
+            var response = await _userService.List();
+            return Ok(response);
+        }
     }
 }

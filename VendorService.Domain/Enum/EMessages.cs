@@ -6,12 +6,12 @@ namespace VendorService.Domain.Enums
 {
     public enum EMessages
     {
-        [Description("Success.")]
+        [Description("Usuário cadastrado com sucesso.")]
         Success = 1,
         [Description("Product not found.")]
-        ProductNotFound = 1,
+        ProductNotFound = 2,
         [Description("Order not found.")]
-        OrderNotFound = 2,
+        OrderNotFound = 3,
 
 
     }

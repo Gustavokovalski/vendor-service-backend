@@ -129,7 +129,7 @@ namespace VendorService.Infra.Data.Repositories
                         {
                             Id = reader.GetGuid(reader.GetOrdinal(nameof(User.Id))),
                             Email = reader.GetString(reader.GetOrdinal(nameof(User.Email))),
-                            Profile = (EProfiles)reader.GetInt32(reader.GetOrdinal(nameof(User.Profile)))
+                            Profile = (EProfiles)reader.GetInt32(reader.GetOrdinal("UserProfile"))
                         });
                     }
                 }

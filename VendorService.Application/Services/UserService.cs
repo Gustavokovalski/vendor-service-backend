@@ -34,7 +34,7 @@ namespace VendorService.Application.Services.Interfaces
        
         public async Task<BaseModel<UserModel>> Authenticate(LoginModel loginModel)
         {
-
+            loginModel.Password = Md5HashExtensions.CreateMD5(loginModel.Password);
             var validationResult = _loginModelValidator.Validate(loginModel);
             if (!validationResult.IsValid)
             {
@@ -57,6 +57,8 @@ namespace VendorService.Application.Services.Interfaces
 
         public async Task<BaseModel<UserRegisterModel>> Create(UserRegisterModel userRegisterModel)
         {
+            userRegisterModel.Password = Md5HashExtensions.CreateMD5(userRegisterModel.Password);
+
             var validationResult = _userRegisterModelValidator.Validate(userRegisterModel);
             if (!validationResult.IsValid)
             {
@@ -67,7 +69,6 @@ namespace VendorService.Application.Services.Interfaces
             var result = _mapper.Map<UserRegisterModel>(await _userRepository.Create(user));
             return new BaseModel<UserRegisterModel>(true, EMessages.Success, result);
         }
-
 
         public async Task<BaseModel<UserRegisterModel>> Update(UserRegisterModel userRegisterModel)
         {

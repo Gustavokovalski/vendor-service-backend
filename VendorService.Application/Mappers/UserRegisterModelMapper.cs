@@ -21,7 +21,7 @@ namespace VendorService.Application.Mappers
             CreateMap<UserRegisterModel, User>()
                 .ForMember(p => p.Id, p => p.MapFrom(x => x.Id))
                 .ForMember(p => p.Email, p => p.MapFrom(x => x.Email))
-                .ForMember(p => p.Profile, p => p.MapFrom(x => x.ProfileId.Value.GetEnum<EProfiles>()))
+                .ForMember(p => p.Profile, p => p.MapFrom(x => x.ProfileId.GetEnum<EProfiles>()))
                 .ForMember(p => p.Password, p => p.MapFrom(x => x.Password));
 
         }
