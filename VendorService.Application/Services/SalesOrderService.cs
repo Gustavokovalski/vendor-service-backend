@@ -35,7 +35,13 @@ namespace VendorService.Application.Services.Interfaces
             }
             var order = _mapper.Map<SalesOrder>(orderModel);
             var result = _mapper.Map<SalesOrderModel>(await _repository.Create(order));
-            return new BaseModel<SalesOrderModel>(true, EMessages.Success, result);
+
+            var res = new BaseModel<SalesOrderModel>(true, EMessages.Success, result);
+
+            if (res.Success)
+                _kafkaRepository.SendMessageByKafka("simula envio de e-mail.");
+
+            return res;
         }
 
         public async Task<BaseModel<SalesOrderModel>> Update(SalesOrderModel productModel)
