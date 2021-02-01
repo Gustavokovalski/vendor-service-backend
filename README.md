@@ -11,7 +11,7 @@ Após execução, acessar a api através do endereço localhost:8080 no navegado
 
 A autenticação é feita através de uma conta Admin profile:
 Login: gustavokovalski.saporiti@gmail.com
-Senha: adminvendor
+Senha: adminvendordb
 
 Demais acessos:
 SQL Server: localhost:1433
