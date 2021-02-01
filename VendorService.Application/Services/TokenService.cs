@@ -8,10 +8,10 @@ using VendorService.Application.Mappers;
 
 namespace VendorService.Application.Services.Interfaces
 {
-    public class TokenService : ITokenService
+    public class RabbitMQService : ITokenService
     {
         private readonly string secret;
-        public TokenService(IConfiguration configuration)
+        public RabbitMQService(IConfiguration configuration)
         {
             secret = configuration["Secret"];
         }

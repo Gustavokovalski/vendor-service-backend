@@ -14,16 +14,16 @@ namespace VendorService.Application.Services.Interfaces
     {
         private readonly IMapper _mapper;
         private readonly ISalesOrderRepository _repository;
-        private readonly IProductOrderRepository _productOrderRepository;
         private readonly SalesOrderModelValidator _salesOrderModelValidator;
-        public SalesOrderService(IMapper mapper, ISalesOrderRepository repository, 
-            IProductOrderRepository productOrderRepository, 
-            SalesOrderModelValidator salesOrderModelValidator)
+        private readonly IKafkaRepository _kafkaRepository;
+        public SalesOrderService(IMapper mapper, ISalesOrderRepository repository,
+            SalesOrderModelValidator salesOrderModelValidator,
+            IKafkaRepository kafkaRepository)
         {
             _mapper = mapper;
             _repository = repository;
-            _productOrderRepository = productOrderRepository;
             _salesOrderModelValidator = salesOrderModelValidator;
+            _kafkaRepository = kafkaRepository;
         }
 
         public async Task<BaseModel<SalesOrderModel>> Create(SalesOrderModel orderModel)
@@ -73,6 +73,12 @@ namespace VendorService.Application.Services.Interfaces
         {
             var result = _mapper.Map<List<SalesOrderModel>>(await _repository.List());
             return new BaseModel<List<SalesOrderModel>>(true, EMessages.Success, result);
+        }
+
+        public string SendEmail(string message)
+        {
+            return _kafkaRepository.SendMessageByKafka(message);
+            //return "deu certo";
         }
     }
 }

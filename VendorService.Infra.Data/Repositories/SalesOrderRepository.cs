@@ -64,7 +64,7 @@ namespace VendorService.Infra.Data.Repositories
                     connection.Close();
                     return order;
                 }
-                catch (Exception e)
+                catch
                 {
                     transaction.Rollback();
                     throw;
@@ -188,7 +188,7 @@ namespace VendorService.Infra.Data.Repositories
                     return order;
 
                 } 
-                catch (Exception e)
+                catch
                 {
                     transaction.Rollback();
                     throw;

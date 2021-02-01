@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using VendorService.Application.Mappers;
 using VendorService.Application.Services.Interfaces;
@@ -13,10 +13,11 @@ namespace VendorService.Api.Controllers
     public class SalesOrderController : ControllerBase
     {
         private readonly ISalesOrderService _service;
-
-        public SalesOrderController(ISalesOrderService service)
+        private readonly ILogger<SalesOrderController> _logger;
+        public SalesOrderController(ISalesOrderService service, ILogger<SalesOrderController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -29,6 +30,7 @@ namespace VendorService.Api.Controllers
             }
 
             var response = await _service.Create(salesOrderModel);
+            _logger.LogInformation($"Create Sales Order => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
@@ -42,6 +44,7 @@ namespace VendorService.Api.Controllers
             }
 
             var response = await _service.Update(salesOrderModel);
+            _logger.LogInformation($"Update Sales Order => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
@@ -50,6 +53,7 @@ namespace VendorService.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _service.Delete(id);
+            _logger.LogInformation($"Delete Sales Order => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
@@ -58,6 +62,7 @@ namespace VendorService.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var response = await _service.GetById(id);
+            _logger.LogInformation($"Get Sales Order by id => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
@@ -66,6 +71,7 @@ namespace VendorService.Api.Controllers
         public async Task<IActionResult> List()
         {
             var response = await _service.List();
+            _logger.LogInformation($"List Sales Order => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
@@ -74,6 +80,7 @@ namespace VendorService.Api.Controllers
         public async Task<IActionResult> GetByOrderId(int id)
         {
             var response = await _service.GetByOrderId(id);
+            _logger.LogInformation($"Get Product Order => message : {response.Message[0].Description}");
             return Ok(response);
         }
     }

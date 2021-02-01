@@ -5,4 +5,10 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="1.5.3" />
+    <PackageReference Include="protobuf-net" Version="3.0.73" />
+    <PackageReference Include="RabbitMQ" Version="3.6.2" />
+  </ItemGroup>
+
 </Project>

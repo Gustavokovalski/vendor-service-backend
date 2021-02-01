@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using VendorService.Application.Mappers;
@@ -13,10 +14,12 @@ namespace VendorService.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ILogger<UserController> logger)
         {
             _userService = userService;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -24,8 +27,9 @@ namespace VendorService.Api.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var result = await _userService.Authenticate(model);
-            return Ok(result);
+            var response = await _userService.Authenticate(model);
+            _logger.LogInformation($"Login => message : {response.Message[0].Description}");
+            return Ok(response);
         }
 
 
@@ -38,6 +42,7 @@ namespace VendorService.Api.Controllers
             }
 
             var response = await _userService.Create(userRegisterModel);
+            _logger.LogInformation($"Create User => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
@@ -51,6 +56,7 @@ namespace VendorService.Api.Controllers
             }
 
             var response = await _userService.Update(userRegisterModel);
+            _logger.LogInformation($"Update User => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
@@ -59,14 +65,7 @@ namespace VendorService.Api.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var response = await _userService.Delete(id);
-            return Ok(response);
-        }
-
-        [HttpGet]
-        [Route("profiles")]
-        public IActionResult GetProfiles()
-        {
-            var response = _userService.ListProfiles();
+            _logger.LogInformation($"Delete User => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
@@ -75,15 +74,16 @@ namespace VendorService.Api.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var response = await _userService.GetById(id);
+            _logger.LogInformation($"Get User by id => message : {response.Message[0].Description}");
             return Ok(response);
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        //[AllowAnonymous]
         public async Task<IActionResult> List()
         {
             var response = await _userService.List();
+            _logger.LogInformation($"List Users => message : {response.Message[0].Description}");
             return Ok(response);
         }
     }

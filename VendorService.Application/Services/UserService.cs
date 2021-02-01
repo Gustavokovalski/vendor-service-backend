@@ -102,22 +102,6 @@ namespace VendorService.Application.Services.Interfaces
             await _userRepository.Delete(id);
             return new BaseModel<UserModel>(true, EMessages.SuccessUserDelete);
         }
-
-        public BaseModel<List<EnumModel>> ListProfiles()
-        {
-            var profiles = Enum.GetValues(typeof(EProfiles));
-            var result = new List<EnumModel>();
-            foreach (var profile in profiles)
-            {
-                result.Add(new EnumModel()
-                {
-                    Id = ((EProfiles)profile).GetEnumValue(),
-                    Name = ((EProfiles)profile).GetEnumName(),
-                    Description = ((EProfiles)profile).GetEnumDescription()
-                });
-            }
-            return new BaseModel<List<EnumModel>>(true, EMessages.Success, result);
-        }
     }
 }
 

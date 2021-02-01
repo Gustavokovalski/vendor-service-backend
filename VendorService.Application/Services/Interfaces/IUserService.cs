@@ -14,6 +14,5 @@ namespace VendorService.Application.Services.Interfaces
         Task<BaseModel<UserModel>> Delete(Guid id);
         Task<BaseModel<UserModel>> GetById(Guid id);
         Task<BaseModel<List<UserModel>>> List();
-        BaseModel<List<EnumModel>> ListProfiles();
     }
 }
