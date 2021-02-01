@@ -67,7 +67,7 @@ namespace VendorService.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Employee")]
+        [Authorize(Roles = "Admin,Employee,Customer")]
         public async Task<IActionResult> List()
         {
             var response = await _service.List();
