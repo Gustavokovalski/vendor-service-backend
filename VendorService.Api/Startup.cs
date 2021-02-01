@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Serilog.Core;
 using VendorService.Api.Configuration;
 using VendorService.Application.Mappers;
 
@@ -27,14 +25,8 @@ namespace VendorService.Api
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            //services.AddScoped((context) =>
-            //{
-            //    return Logger.Get();
-            //});
-
-
-
             services.AddCors();
+
             services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -46,15 +38,12 @@ namespace VendorService.Api
             services.AddSwaggerConfiguration();
 
             services.AddAuthConfiguration(Configuration);
-            
-            services.AddSingleton<IHostedService, KafkaConfiguration>();
-            
+           
             services.AddDependencyInjectionConfig();
 
-
             services.AddAutoMapper(typeof(UserModelMapper));
+
             services.AddWebApiConfiguration();
-            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
