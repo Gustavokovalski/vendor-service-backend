@@ -10,7 +10,7 @@ Após execução, acessar a api através do endereço **localhost:8080** no nave
 
 A autenticação é feita através de uma conta Admin profile:
 
-**Login: gustavokovalski.saporiti@gmail.com **
+**Login: gustavokovalski.saporiti@gmail.com**
 
 **Senha: adminvendordb**
 
