@@ -2,7 +2,7 @@
 # Projeto Vendor Service - BNE
 
 Microserviço baseado em um ambiente de criação de pedidos de venda utilizando
-padrão de arquitetura DDD (Domain Driven Design).
+a abordagem do DDD para modelagem do software (Domain Driven Design).
 
 Comando para execução do backend utilizando Docker:
 $ docker-compose up -d
