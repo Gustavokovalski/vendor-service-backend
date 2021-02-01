@@ -80,11 +80,5 @@ namespace VendorService.Application.Services.Interfaces
             var result = _mapper.Map<List<SalesOrderModel>>(await _repository.List());
             return new BaseModel<List<SalesOrderModel>>(true, EMessages.Success, result);
         }
-
-        public string SendEmail(string message)
-        {
-            return _kafkaRepository.SendMessageByKafka(message);
-            //return "deu certo";
-        }
     }
 }

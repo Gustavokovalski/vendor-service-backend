@@ -13,6 +13,5 @@ namespace VendorService.Application.Services.Interfaces
         Task<BaseModel<SalesOrderModel>> GetById(int id);
         Task<BaseModel<List<ProductOrderModel>>> GetByOrderId(int id);
         Task<BaseModel<List<SalesOrderModel>>> List();
-        string SendEmail(string message);
     }
 }
