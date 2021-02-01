@@ -10,7 +10,7 @@ $ docker-compose up -d
 Após execução, acessar a api através do endereço localhost:8080 no navegador.
 
 A autenticação é feita através de uma conta Admin profile:
-Login: admin.vendor@vendor.com
+Login: gustavokovalski.saporiti@gmail.com
 Senha: adminvendor
 
 Demais acessos:
